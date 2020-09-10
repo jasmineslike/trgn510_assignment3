@@ -17,7 +17,7 @@ def gtf2json():
             #if match, the m will not empty
             if m != []:
                 #find out the gene_name, chr, startPos, endPos
-                match = re.match(r'(\d).*?(\d{1,}).*?(\d{1,}).*?\s*.\s*[-+]?\s*.\s*\w*\s\"\w*\";\s\w*\s\"(\w*-?\w*.?\w).*', line)
+                match = re.match(r'(\w*).*?(\d{1,}).*?(\d{1,}).*;.gene_name\s\"(\w*-?\w*.?\w).*', line)
                 #make a dictionary of this line
                 dict = {}
                 if match:
@@ -28,12 +28,11 @@ def gtf2json():
                 else:
                     print(m[0])
                     print("No match!!!")
-                print(dict)
+             	#append dict entire to json list
                 jsonList.append(dict)
     #write json list to data.json file
     with open('data.json','w') as json_file:
         json.dump(jsonList, json_file)
-
-
+	print(jsonList)
 
 gtf2json()
